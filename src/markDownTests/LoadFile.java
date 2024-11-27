@@ -12,9 +12,6 @@ import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 public class LoadFile{
-  //public static Path startPath(){
-  //  return Paths.get(System.getProperty("user.dir"),"src","exampleTests");
-  //}
   public List<String> loadLines(Path name){
     return loadText(name).lines().toList();
   }

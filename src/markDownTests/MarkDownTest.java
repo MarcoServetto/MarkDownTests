@@ -2,34 +2,33 @@ package markDownTests;
 
 import java.nio.file.Path;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class MarkDownTest{
-  Path path; List<String> content;
-  public  MarkDownTest(Path path){
-    this.path= path;
-    this.content= new LoadFile().loadLines(path);
-  }
+public class MarkDownTest {
+  public final Path path;
+  public final List<String> content;
   private boolean omitting = false;
   private boolean notOmit(String line) {
-    if (line.contains("OMIT_START")){ omitting = true; }
+    if (TextTag.OmitStart.match(line)){ omitting = true; }
     try{ return !omitting; }
-    finally{ if (line.contains("OMIT_END")){ omitting = false; } }
+    finally{ if (TextTag.OmitEnd.match(line)){ omitting = false; } }
   }
-  public String toMarkdown(){
+
+  public MarkDownTest(Path path) {
+    this.path = path;
+    this.content = new LoadFile().loadLines(path);
+  }
+  public List<String> extractMarkdownLines() {
     return content.stream()
-      .dropWhile(line -> !line.contains("/*START"))
+      .dropWhile(TextTag.Start::notMatch)
       .skip(1)
       .map(this::lineToCode)
       .filter(this::notOmit)
-      .takeWhile(line -> !line.contains("END*/"))
-      .collect(Collectors.joining("\n"));
+      .takeWhile(TextTag.End::notMatch)
+      .toList();
   }
   String lineToCode(String line){
-    boolean code= line.contains("-----*/") || line.contains("/*-----");
+    boolean code= TextTag.CodeStart.match(line) || TextTag.CodeEnd.match(line);
     if (code){ return "`````"; }
     return line;
   }
 }
-
-
