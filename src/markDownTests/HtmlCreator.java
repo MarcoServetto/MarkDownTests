@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.ext.tables.TablesExtension;
 
 public record HtmlCreator(Path rootPath){
   private static final String HTML_HEADER = """
@@ -101,8 +102,9 @@ record SectionInfo(
 
   public String generatePage(){
     String text= lines.stream().collect(Collectors.joining("\n"));
-    Parser parser = Parser.builder().build();
-    HtmlRenderer renderer = HtmlRenderer.builder().build();
+    List<Parser.ParserExtension> extensions = List.of(TablesExtension.create());
+    Parser parser = Parser.builder().extensions(extensions).build();
+    HtmlRenderer renderer = HtmlRenderer.builder().extensions(extensions).build();
     return renderer.render(parser.parse(text));    
   }
 

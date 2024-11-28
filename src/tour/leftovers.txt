@@ -1,0 +1,27 @@
+The Fearless compiler produces an optimised representation
+of the source code that can then be executed by the Fearless runtime.
+
+Comments are another tool to make our code more readable or clear.
+Comments are ignored by the fearless compiler
+in the same way extra spacing is ignored.
+
+A line starting with `//` is a single line comment.
+The whole line is ignored by the Fearless compiler.
+Any text enclosed by the delimiters `/*...*~/` 
+is called a multi-line comment and it is also ignored by the
+Fearless compiler.
+Additional spaces and newlines can be added mostly anywhere in the
+code and are also ignored; that is, comments and extra spaces do
+not play any role in the optimised representation produced by
+the Fearless compiler, and thus will have no impact on the execution.
+
+That is, comments have no impact on the execution;
+but can be precious to insert human-readable explanations in the code; facilitating the understanding (and re understanding) of code.
+
+
+It only works for these four, specific directions.
+What would happen if we wanted to add more directions 
+(`NorthEast`, `NorthWest`, etc.).
+We would have to manually calculate the resulting direction.
+This is a programming anti-pattern and should be avoided.
+

@@ -2,6 +2,7 @@ module my.markDownTests {
     requires flexmark;
     requires flexmark.util.ast;
     requires org.junit.jupiter.api;
+    requires flexmark.ext.tables;
     //requires flexmark.util.collection;
     //requires flexmark.util.builder;
     //requires flexmark.util.data;

@@ -29,6 +29,6 @@ public class MarkDownTest {
   String lineToCode(String line){
     boolean code= TextTag.CodeStart.match(line) || TextTag.CodeEnd.match(line);
     if (code){ return "`````"; }
-    return line;
+    return line.replace("*~/", "*/");
   }
 }
