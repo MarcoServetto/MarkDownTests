@@ -3,6 +3,7 @@ module my.markDownTests {
     requires flexmark.util.ast;
     requires org.junit.jupiter.api;
     requires flexmark.ext.tables;
+    exports markDownTests;
     //requires flexmark.util.collection;
     //requires flexmark.util.builder;
     //requires flexmark.util.data;
