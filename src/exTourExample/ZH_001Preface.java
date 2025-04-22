@@ -1,4 +1,4 @@
-package tour;
+package exTourExample;
 
 import static org.junit.jupiter.api.Assertions.*;
 
